@@ -4,7 +4,7 @@
 ## Equipe
 Matheus Leonardo Cabral - GRR20184600 <br/>
 Rafael Antonio Damiani - GRR20175502 <br/>
-Rafael Bini da Silva - GRR2018
+Rafael Bini da Silva - GRR20184585
 
 ## Especificação
 **Um banco resolveu aprimorar os seus produtos financeiros, e por conta disso vai alterar o sistema que gerencia as contas
