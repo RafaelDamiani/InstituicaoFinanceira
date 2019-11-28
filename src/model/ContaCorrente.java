@@ -12,9 +12,6 @@ package model;
 public class ContaCorrente extends Conta {
     public double limite;
     public int numeroConta;
-
-    public ContaCorrente() {
-    }
     
     public double getDepositoInicial() {
         return depositoInicial;

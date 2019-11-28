@@ -12,9 +12,6 @@ package model;
 public class ContaInvestimento extends Conta {
     public double montanteMinimo;
     public double depositoMinimo;
-    
-    public ContaInvestimento() {
-    }
 
     public double getMontanteMinimo() {
         return montanteMinimo;

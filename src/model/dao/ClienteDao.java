@@ -20,17 +20,17 @@ import model.Cliente;
 public class ClienteDao {
     private String sql = "";
     
-    public void insere(Cliente cliente) throws SQLException {
+    public void insert(Cliente cliente) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         try{
             con = new ConnectionFactoryComProperties().getConnection();
-            sql = "insert into tb_cliente (cpf, nome, sobrenome, rg, endereco) values, (?,?,?,?,?)";
+            sql = "insert into tb_cliente (cpf, nome, sobrenome, rg, endereco) values (?,?,?,?,?)";
             stmt = con.prepareStatement(sql);
-            stmt.setLong(1, cliente.getCpf());
+            stmt.setString(1, cliente.getCpf());
             stmt.setString(2, cliente.getNome());
             stmt.setString(3, cliente.getSobreNome());
-            stmt.setLong(4, cliente.getRg());
+            stmt.setString(4, cliente.getRg());
             stmt.setString(5, cliente.getEndereco());
             stmt.execute();
         } catch (SQLException e) {
@@ -46,15 +46,15 @@ public class ClienteDao {
         PreparedStatement stmt = null;
         try {
             con = new ConnectionFactoryComProperties().getConnection();
-            Long cpfCliente = cliente.getCpf();
-            sql = "delete from tb_conta where cpf  = ?";
+            int idCliente = cliente.getIdCliente();
+            sql = "delete from tb_conta where idcliente  = ?";
             stmt = con.prepareStatement(sql);
-            stmt.setLong(1, cpfCliente);
+            stmt.setInt(1, idCliente);
             stmt.executeUpdate();
             
-            sql = "delete from tb_cliente where cpf = ?";
+            sql = "delete from tb_cliente where idcliente = ?";
             stmt = con.prepareStatement(sql);
-            stmt.setLong(1, cpfCliente);
+            stmt.setInt(1, idCliente);
             stmt.executeUpdate();
         } catch(SQLException e) {
              throw new RuntimeException(e);
@@ -68,24 +68,28 @@ public class ClienteDao {
         Connection con = null;
         PreparedStatement stmt = null;
         
+        String filtroNome = "%" + filtro + "%";
+        
         try {
+            Cliente cliente = new Cliente(filtroNome, filtroNome, filtro, filtro, filtro);
             con = new ConnectionFactoryComProperties().getConnection();
-            sql = "select * from tb_cliente where nome like %?% or sobrenome like '%?%' or rg = ? or cpf = ?";
+            sql = "select * from tb_cliente where nome like ? or sobrenome like ? or rg = ? or cpf = ?";
+            
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, filtro);
-            stmt.setString(2, filtro);
+            stmt.setString(1, filtroNome);
+            stmt.setString(2, filtroNome);
             stmt.setString(3, filtro);
             stmt.setString(4, filtro);
             
-            ResultSet rst = stmt.executeQuery(sql);    
+            ResultSet rst = stmt.executeQuery();    
             
             List<Cliente> clientes = new ArrayList<Cliente>();
             while (rst.next()) {
-                Cliente cliente = new Cliente();
+                cliente = new Cliente();
                 cliente.setNome(rst.getString("nome"));
-                cliente.setNome(rst.getString("sobrenome"));
-                cliente.setRg(rst.getLong("rg"));
-                cliente.setCpf(rst.getLong("cpf"));
+                cliente.setSobreNome(rst.getString("sobrenome"));
+                cliente.setRg(rst.getString("rg"));
+                cliente.setCpf(rst.getString("cpf"));
                 cliente.setEndereco(rst.getString("endereco"));
                 
                 clientes.add(cliente);
@@ -95,7 +99,7 @@ public class ClienteDao {
         } catch(SQLException e) {
              throw new RuntimeException(e);
         } finally {
-            stmt.close();
+            stmt.close(); 
             con.close();
         }
     }
@@ -105,14 +109,14 @@ public class ClienteDao {
         PreparedStatement stmt = null;
         try{
             con = new ConnectionFactoryComProperties().getConnection();
-            sql = "update cliente set nome = ?, sobrenome = ?, rg = ?, cpf = ?, Endereco = ? where cpf = ?";
+            sql = "update tb_cliente set nome = ?, sobrenome = ?, rg = ?, cpf = ?, Endereco = ? where idcliente = ?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, cliente.getNome());
             stmt.setString(2, cliente.getSobreNome());
-            stmt.setLong(3, cliente.getRg());
-            stmt.setLong(4, cliente.getCpf());
+            stmt.setString(3, cliente.getRg());
+            stmt.setString(4, cliente.getCpf());
             stmt.setString(5, cliente.getEndereco());
-            stmt.setLong(6, cliente.getCpf());
+            stmt.setInt(6, cliente.getIdCliente());
             
             stmt.executeUpdate();
         } catch (SQLException e) {

@@ -19,7 +19,7 @@ public class ConnectionFactoryComProperties {
     public Connection getConnection() {
         try {
             Properties prop = new Properties();
-            prop.load(getClass().getResourceAsStream("/org/ufpr/tads/bancoDeDados.properties"));
+            prop.load(getClass().getResourceAsStream("/model/dao/bancoDeDados.properties"));
             String dbDriver = prop.getProperty("db.driver"); 
             String dbUrl = prop.getProperty("db.url"); 
             String dbUser = prop.getProperty("db.user"); 

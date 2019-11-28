@@ -10,13 +10,30 @@ package model;
  * @author rafae
  */
 public class Cliente {
+    public int idCliente;
     public String nome;
     public String sobreNome;
-    public Long rg;
-    public Long cpf;
+    public String rg;
+    public String cpf;
     public String endereco;
-
+    
     public Cliente() {
+    }
+    
+    public Cliente (String nome, String sobrenome, String rg, String cpf, String endereco) {
+        this.nome = nome;
+        this.sobreNome = sobrenome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.endereco = endereco;
+    }
+    
+    public int getIdCliente() {
+        return idCliente;
+    }
+    
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
     
     public String getNome() {
@@ -35,19 +52,19 @@ public class Cliente {
         this.sobreNome = sobreNome;
     }
 
-    public Long getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(Long rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

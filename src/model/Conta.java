@@ -11,9 +11,6 @@ package model;
  */
 public class Conta implements ContaI {
     public double depositoInicial;
-
-    public Conta() {
-    }
     
     public double getDepositoInicial() {
         return depositoInicial;
