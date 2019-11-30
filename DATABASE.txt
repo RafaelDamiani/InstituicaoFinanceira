@@ -1,4 +1,4 @@
--- Banco de Dados: POO
+-- Banco de Dados: instituicaofinanceira
 
 -- Usuario: postgres
 -- Senha: senha123
@@ -6,9 +6,9 @@
 -- Tabela de Clientes
 
 create database instituicaofinanceira;
-use instituicaofinanceira;
+
 create table tb_cliente (
-idcliente int auto_increment not null,
+idcliente serial,
 cpf varchar(11) not null,
 nome varchar(255) not null,
 sobrenome varchar(255) not null,
@@ -20,7 +20,11 @@ constraint pkCliente primary key (idcliente)
 -- Tabela de Contas
 
 create table tb_conta (
+<<<<<<< HEAD:DATABASE.sql
 num_conta bigint auto_increment not null,
+=======
+idconta serial not null,
+>>>>>>> 2cbd86148595357d716a9ddb53313e18fc3a864b:DATABASE.txt
 idcliente int not null,
 saldo decimal(10,2) not null,
 tipo varchar(3) not null, -- CC (para Conta Corrente) ou INV (para Conta de Investimento)

@@ -28,6 +28,7 @@ public class MainWindowView extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+<<<<<<< HEAD
         clientesView1 = new view.ClienteView();
         clienteView2 = new view.ClienteView();
         contasView1 = new view.ContaView();
@@ -50,10 +51,28 @@ public class MainWindowView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(clienteView2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
+        ClientesPanel = new view.ClientesView();
+        ContasPanel = new view.ContasView();
+        ManipularPanel = new view.ManipularView();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout ClientesPanelLayout = new javax.swing.GroupLayout(ClientesPanel);
+        ClientesPanel.setLayout(ClientesPanelLayout);
+        ClientesPanelLayout.setHorizontalGroup(
+            ClientesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 641, Short.MAX_VALUE)
+        );
+        ClientesPanelLayout.setVerticalGroup(
+            ClientesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 419, Short.MAX_VALUE)
+>>>>>>> 2cbd86148595357d716a9ddb53313e18fc3a864b
         );
 
-        jTabbedPane1.addTab("Clientes", clientesView1);
+        jTabbedPane1.addTab("Clientes", ClientesPanel);
 
+<<<<<<< HEAD
         javax.swing.GroupLayout contasView1Layout = new javax.swing.GroupLayout(contasView1);
         contasView1.setLayout(contasView1Layout);
         contasView1Layout.setHorizontalGroup(
@@ -63,10 +82,22 @@ public class MainWindowView extends javax.swing.JFrame {
         contasView1Layout.setVerticalGroup(
             contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 452, Short.MAX_VALUE)
+=======
+        javax.swing.GroupLayout ContasPanelLayout = new javax.swing.GroupLayout(ContasPanel);
+        ContasPanel.setLayout(ContasPanelLayout);
+        ContasPanelLayout.setHorizontalGroup(
+            ContasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 641, Short.MAX_VALUE)
+        );
+        ContasPanelLayout.setVerticalGroup(
+            ContasPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 419, Short.MAX_VALUE)
+>>>>>>> 2cbd86148595357d716a9ddb53313e18fc3a864b
         );
 
-        jTabbedPane1.addTab("Contas", contasView1);
+        jTabbedPane1.addTab("Contas", ContasPanel);
 
+<<<<<<< HEAD
         javax.swing.GroupLayout manipularView1Layout = new javax.swing.GroupLayout(manipularView1);
         manipularView1.setLayout(manipularView1Layout);
         manipularView1Layout.setHorizontalGroup(
@@ -76,9 +107,20 @@ public class MainWindowView extends javax.swing.JFrame {
         manipularView1Layout.setVerticalGroup(
             manipularView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 452, Short.MAX_VALUE)
+=======
+        javax.swing.GroupLayout ManipularPanelLayout = new javax.swing.GroupLayout(ManipularPanel);
+        ManipularPanel.setLayout(ManipularPanelLayout);
+        ManipularPanelLayout.setHorizontalGroup(
+            ManipularPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 641, Short.MAX_VALUE)
+        );
+        ManipularPanelLayout.setVerticalGroup(
+            ManipularPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 419, Short.MAX_VALUE)
+>>>>>>> 2cbd86148595357d716a9ddb53313e18fc3a864b
         );
 
-        jTabbedPane1.addTab("Manipular", manipularView1);
+        jTabbedPane1.addTab("Manipular", ManipularPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,15 +168,21 @@ public class MainWindowView extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainWindowView().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private view.ClienteView clienteView2;
     private view.ClienteView clientesView1;
     private view.ContaView contasView1;
+=======
+    private view.ClientesView ClientesPanel;
+    private view.ContasView ContasPanel;
+    private view.ManipularView ManipularPanel;
+>>>>>>> 2cbd86148595357d716a9ddb53313e18fc3a864b
     private javax.swing.JTabbedPane jTabbedPane1;
-    private view.ManipularView manipularView1;
     // End of variables declaration//GEN-END:variables
 }
