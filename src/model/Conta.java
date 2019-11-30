@@ -68,6 +68,10 @@ public class Conta implements ContaI {
         return saldo;
     }
     
+    public void setSaldo(double saldo){
+        this.saldo = saldo;
+    }
+    
     public void remunera() {
         
     }

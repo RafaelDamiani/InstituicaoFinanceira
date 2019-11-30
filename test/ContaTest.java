@@ -28,12 +28,27 @@ public class ContaTest {
         ContaCorrente cc = new ContaCorrente();
         cc.setDepositoInicial(1500.00);
         cc.setLimite(400.00);
+        cc.setSaldo(1500.00);        
         cc.setCliente(new ClienteDao().getCliente(2));
         cc.setTipo("CC");
         ContaDao persist = new ContaDao();
-        persist.insert(cc);        
+        persist.insertContaCorrente(cc);        
+    }
+    
+    @Test
+    public void remunerarCC() throws SQLException{
+        ContaDao persist = new ContaDao();
+        ContaCorrente cc = persist.getContaCorrente(7);
+        cc.setSaldo(cc.getSaldo() * 1.01);
+        persist.update(cc);
+  
     }
 
-
-    
+    @Test
+    public void deletarConta() throws SQLException{
+        ContaDao deletar = new ContaDao();
+        ContaCorrente cc = deletar.getContaCorrente(7);
+        deletar.delete(cc);
+  
+    }
 }

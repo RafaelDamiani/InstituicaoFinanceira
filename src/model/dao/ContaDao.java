@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import model.Cliente;
+import model.Conta;
 import model.ContaCorrente;
 
 /**
@@ -45,6 +46,7 @@ public class ContaDao {
                 cc.setCliente( new Cliente(rst.getString("nome"), rst.getString("sobrenome"), rst.getString("rg"), rst.getString("cpf"), rst.getString("endereco")));
                 cc.setNumConta(rst.getInt("num_conta"));
                 cc.setTipo(rst.getString("tipo"));
+                cc.setSaldo(rst.getDouble("saldo"));
             }
             
             return cc;
@@ -56,7 +58,7 @@ public class ContaDao {
         }
     }
 
-    public void insert(ContaCorrente cc) throws SQLException{
+    public void insertContaCorrente(ContaCorrente cc) throws SQLException{
         Connection con = null;
         PreparedStatement stmt = null;
         try{
@@ -77,6 +79,43 @@ public class ContaDao {
         }
     }
     
+    public void update(Conta conta) throws SQLException {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try{
+            con = new ConnectionFactoryComProperties().getConnection();
+            sql = "update tb_conta set saldo = ? where num_conta = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setDouble(1, conta.getSaldo());
+            stmt.setInt(2, conta.getNumero());
+            
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            stmt.close();
+            con.close();
+        }
+    }
+    
+    public void delete(Conta conta) throws SQLException {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try {
+            con = new ConnectionFactoryComProperties().getConnection();
+            int numConta = conta.getNumero();
+            sql = "delete from tb_conta where num_conta  = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, numConta);
+            stmt.executeUpdate();
+
+        } catch(SQLException e) {
+             throw new RuntimeException(e);
+        } finally {
+            stmt.close();
+            con.close();
+        }
+    }
 
 }
 

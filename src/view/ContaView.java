@@ -9,12 +9,12 @@ package view;
  *
  * @author rfabini
  */
-public class ContasView extends javax.swing.JPanel {
+public class ContaView extends javax.swing.JPanel {
 
     /**
      * Creates new form ContasView
      */
-    public ContasView() {
+    public ContaView() {
         initComponents();
     }
 
