@@ -20,15 +20,14 @@ constraint pkCliente primary key (idcliente)
 -- Tabela de Contas
 
 create table tb_conta (
-idconta serial not null,
+num_conta serial not null,
 idcliente int not null,
-num_conta bigint not null,
 saldo decimal(10,2) not null,
 tipo varchar(3) not null, -- CC (para Conta Corrente) ou INV (para Conta de Investimento)
 deposito_inicial decimal(10,2) not null,
-limite decimal(10,2) not null, -- Aplicável apenas para Conta de Corrente
-montante_min decimal(10,2) not null, -- Aplicável apenas para Conta de Investimento
-deposito_min decimal(10,2) not null, -- Aplicável apenas para Conta de Investimento
-constraint pkConta primary key (idconta),
+limite decimal(10,2), -- Aplicável apenas para Conta de Corrente
+montante_min decimal(10,2),-- Aplicável apenas para Conta de Investimento
+deposito_min decimal(10,2), -- Aplicável apenas para Conta de Investimento
+constraint pkConta primary key (num_conta),
 constraint fkClienteConta foreign key (idcliente) references tb_cliente(idcliente)
 );

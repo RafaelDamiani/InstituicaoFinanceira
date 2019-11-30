@@ -11,6 +11,31 @@ package model;
  */
 public class Conta implements ContaI {
     public double depositoInicial;
+    private double saldo;
+    private Cliente cliente;
+    private int numConta;
+    private String tipo;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    public void setNumConta(int num){
+        numConta = num;
+    }
+    
     
     public double getDepositoInicial() {
         return depositoInicial;
@@ -28,16 +53,19 @@ public class Conta implements ContaI {
         return true;
     }
     
+    @Override
     public Cliente getDono() {
-        return new Cliente();
+        return cliente;
     }
     
+    @Override
     public int getNumero() {
-       return 1;
+       return numConta;
     }
     
+    @Override
     public double getSaldo() {
-        return 2.0;
+        return saldo;
     }
     
     public void remunera() {
