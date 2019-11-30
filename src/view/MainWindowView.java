@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.awt.Color;
+
 /**
  *
  * @author rfabini
@@ -31,6 +33,18 @@ public class MainWindowView extends javax.swing.JFrame {
         clientesView1 = new view.ClienteView();
         clienteView1 = new view.ClienteView();
         contasView1 = new view.ContaView();
+        jComboConta = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        inputClienteConta3 = new javax.swing.JTextField();
+        jLabelClienteConta3 = new javax.swing.JLabel();
+        jButtonSalvarClienteConta = new javax.swing.JButton();
+        inputClienteConta1 = new javax.swing.JTextField();
+        jLabelClienteConta1 = new javax.swing.JLabel();
+        inputClienteConta2 = new javax.swing.JTextField();
+        jLabelClienteConta2 = new javax.swing.JLabel();
+        jLabelCliente = new javax.swing.JLabel();
+        jComboCliente = new javax.swing.JComboBox<>();
+        jLabelConta = new javax.swing.JLabel();
         manipularView1 = new view.ManipularView();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,15 +68,110 @@ public class MainWindowView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Clientes", clientesView1);
 
+        jComboConta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Conta Corrente", "Conta Investimento" }));
+        jComboConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboContaActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Vincular Cliente e Conta");
+
+        inputClienteConta3.setEditable(false);
+        inputClienteConta3.setBackground(java.awt.Color.lightGray);
+        inputClienteConta3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabelClienteConta3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelClienteConta3.setText("Número da Conta: ");
+
+        jButtonSalvarClienteConta.setText("Salvar");
+
+        inputClienteConta1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        inputClienteConta1.setText("0.00");
+
+        jLabelClienteConta1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelClienteConta1.setText("Depósito Inicial:     R$");
+
+        inputClienteConta2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        inputClienteConta2.setText("0.00");
+
+        jLabelClienteConta2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelClienteConta2.setText("Limite:                 R$");
+
+        jLabelCliente.setText("Cliente:");
+
+        jComboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um cliente..." }));
+
+        jLabelConta.setText("Conta:");
+
         javax.swing.GroupLayout contasView1Layout = new javax.swing.GroupLayout(contasView1);
         contasView1.setLayout(contasView1Layout);
         contasView1Layout.setHorizontalGroup(
             contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
+            .addGroup(contasView1Layout.createSequentialGroup()
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contasView1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCliente)
+                            .addComponent(jLabelConta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboConta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(contasView1Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contasView1Layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(jButtonSalvarClienteConta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(contasView1Layout.createSequentialGroup()
+                                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabelClienteConta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabelClienteConta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabelClienteConta3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inputClienteConta3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputClienteConta1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputClienteConta2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 25, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contasView1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(78, 78, 78))
         );
         contasView1Layout.setVerticalGroup(
             contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGroup(contasView1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelConta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboConta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelClienteConta1)
+                    .addComponent(inputClienteConta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputClienteConta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelClienteConta2))
+                .addGap(18, 18, 18)
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputClienteConta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelClienteConta3))
+                .addGap(28, 28, 28)
+                .addComponent(jButtonSalvarClienteConta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Contas", contasView1);
@@ -84,15 +193,46 @@ public class MainWindowView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 478, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboContaActionPerformed
+        String conta = (String) jComboConta.getSelectedItem();
+        if(conta.equals("Conta Investimento")){
+            /*jLabelDepositoInicial.setVisible(false);
+            depositoInicial.setVisible(false);
+            jLabelLimite.setVisible(false);
+            limite.setVisible(false);
+            jLabelNumeroConta.setVisible(false);
+            numeroConta.setVisible(false);*/
+            jLabelClienteConta1.setText("Montante Mínimo:  R$");
+            jLabelClienteConta2.setText("Depósito Mínimo:   R$");
+            jLabelClienteConta3.setText("Depósito Inicial:     R$");
+            inputClienteConta3.setText("0.00");
+            inputClienteConta3.setEditable(true);
+            inputClienteConta3.setBackground(Color.WHITE);
+        }else{
+            /*jLabelDepositoInicial.setVisible(true);
+            depositoInicial.setVisible(true);
+            jLabelLimite.setVisible(true);
+            limite.setVisible(true);
+            jLabelNumeroConta.setVisible(true);
+            numeroConta.setVisible(true);*/
+            jLabelClienteConta1.setText("Depósito Inicial:     R$");
+            jLabelClienteConta2.setText("Limite:                 R$");
+            jLabelClienteConta3.setText("Número da Conta: ");
+            inputClienteConta3.setEditable(false);
+            inputClienteConta3.setText("");
+            inputClienteConta3.setBackground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_jComboContaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +274,18 @@ public class MainWindowView extends javax.swing.JFrame {
     private view.ClienteView clienteView1;
     private view.ClienteView clientesView1;
     private view.ContaView contasView1;
+    private javax.swing.JTextField inputClienteConta1;
+    private javax.swing.JTextField inputClienteConta2;
+    private javax.swing.JTextField inputClienteConta3;
+    private javax.swing.JButton jButtonSalvarClienteConta;
+    private javax.swing.JComboBox<String> jComboCliente;
+    private javax.swing.JComboBox<String> jComboConta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelCliente;
+    private javax.swing.JLabel jLabelClienteConta1;
+    private javax.swing.JLabel jLabelClienteConta2;
+    private javax.swing.JLabel jLabelClienteConta3;
+    private javax.swing.JLabel jLabelConta;
     private javax.swing.JTabbedPane jTabbedPane1;
     private view.ManipularView manipularView1;
     // End of variables declaration//GEN-END:variables
