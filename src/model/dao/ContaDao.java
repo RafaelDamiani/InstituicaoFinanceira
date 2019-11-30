@@ -15,6 +15,7 @@ import java.util.List;
 import model.Cliente;
 import model.Conta;
 import model.ContaCorrente;
+import model.ContaInvestimento;
 
 /**
  *
@@ -26,9 +27,7 @@ public class ContaDao {
     
     public ContaCorrente getContaCorrente(long numeroConta) throws SQLException {
         Connection con = null;
-        PreparedStatement stmt = null;
-        
-        
+        PreparedStatement stmt = null;              
         try {
             ContaCorrente cc = new ContaCorrente();
             
@@ -67,9 +66,31 @@ public class ContaDao {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, cc.getCliente().getIdCliente());
             stmt.setDouble(2, cc.getSaldo());
-            stmt.setString(3, cc.getTipo());
+            stmt.setString(3, "CC");
             stmt.setDouble(4, cc.getDepositoInicial());
             stmt.setDouble(5, cc.getLimite());
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            stmt.close();
+            con.close();
+        }
+    }
+    
+    public void insertContaInvestimento(ContaInvestimento ci) throws SQLException{
+        Connection con = null;
+        PreparedStatement stmt = null;
+        try{
+            con = new ConnectionFactoryComProperties().getConnection();
+            sql = "insert into tb_conta (idcliente , saldo, tipo , deposito_inicial, montante_min, deposito_min ) values (?,?,?,?,?,?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, ci.getCliente().getIdCliente());
+            stmt.setDouble(2, ci.getSaldo());
+            stmt.setString(3, "INV");
+            stmt.setDouble(4, ci.getDepositoInicial());
+            stmt.setDouble(5, ci.getMontanteMinimo());
+            stmt.setDouble(6, ci.getDepositoMinimo());
             stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

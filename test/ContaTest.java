@@ -6,6 +6,7 @@
 
 import java.sql.SQLException;
 import model.ContaCorrente;
+import model.ContaInvestimento;
 import model.dao.ClienteDao;
 import model.dao.ContaDao;
 import org.junit.After;
@@ -36,7 +37,7 @@ public class ContaTest {
     }
     
     @Test
-    public void remunerarCC() throws SQLException{
+    public void atualizarConta() throws SQLException{
         ContaDao persist = new ContaDao();
         ContaCorrente cc = persist.getContaCorrente(7);
         cc.setSaldo(cc.getSaldo() * 1.01);
@@ -44,6 +45,19 @@ public class ContaTest {
   
     }
 
+    @Test
+    public void inserirCI() throws SQLException{
+        ContaInvestimento ci = new ContaInvestimento();
+        ci.setDepositoInicial(1500.00);
+        ci.setSaldo(1500.00);   
+        ci.setDepositoMinimo(200);
+        ci.setMontanteMinimo(600);
+        ci.setCliente(new ClienteDao().getCliente(2));
+        ci.setTipo("CI");
+        ContaDao persist = new ContaDao();
+        persist.insertContaInvestimento(ci);        
+    }
+    
     @Test
     public void deletarConta() throws SQLException{
         ContaDao deletar = new ContaDao();
