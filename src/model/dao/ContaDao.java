@@ -9,9 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import model.Cliente;
 import model.Conta;
 import model.ContaCorrente;
@@ -42,7 +39,7 @@ public class ContaDao {
             if (rst.next()) {
                 cc.setDepositoInicial(rst.getDouble("deposito_inicial"));
                 cc.setLimite(rst.getDouble("limite"));
-                cc.setCliente( new Cliente(rst.getString("nome"), rst.getString("sobrenome"), rst.getString("rg"), rst.getString("cpf"), rst.getString("endereco")));
+                cc.setCliente( new Cliente(rst.getString("nome"), rst.getString("sobrenome"), rst.getString("rg"), rst.getString("cpf"), rst.getString("endereco"), rst.getDouble("salario")));
                 cc.setNumConta(rst.getInt("num_conta"));
                 cc.setTipo(rst.getString("tipo"));
                 cc.setSaldo(rst.getDouble("saldo"));
