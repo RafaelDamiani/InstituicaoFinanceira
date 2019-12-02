@@ -64,6 +64,11 @@ public class ContaView extends javax.swing.JPanel {
 
         inputClienteConta1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         inputClienteConta1.setText("0.00");
+        inputClienteConta1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputClienteConta1ActionPerformed(evt);
+            }
+        });
 
         jLabelClienteConta1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelClienteConta1.setText("Depósito Inicial:     R$");
@@ -192,6 +197,10 @@ public class ContaView extends javax.swing.JPanel {
             inputClienteConta3.setBackground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_jComboContaActionPerformed
+
+    private void inputClienteConta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputClienteConta1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputClienteConta1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

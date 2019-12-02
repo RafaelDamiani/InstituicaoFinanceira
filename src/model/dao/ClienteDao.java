@@ -25,13 +25,14 @@ public class ClienteDao {
         PreparedStatement stmt = null;
         try{
             con = new ConnectionFactoryComProperties().getConnection();
-            sql = "insert into tb_cliente (cpf, nome, sobrenome, rg, endereco) values (?,?,?,?,?)";
+            sql = "insert into tb_cliente (cpf, nome, sobrenome, rg, endereco, salario) values (?,?,?,?,?,?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, cliente.getCpf());
             stmt.setString(2, cliente.getNome());
-            stmt.setString(3, cliente.getSobreNome());
+            stmt.setString(3, cliente.getSobrenome());
             stmt.setString(4, cliente.getRg());
             stmt.setString(5, cliente.getEndereco());
+            stmt.setDouble(6, cliente.getSalario());
             stmt.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -64,14 +65,14 @@ public class ClienteDao {
         }
     }
     
-    public List<Cliente> lista(String filtro) throws SQLException {
+    public List<Cliente> lista(String filtro, int ordenarPor) throws SQLException {
         Connection con = null;
         PreparedStatement stmt = null;
         
         String filtroNome = "%" + filtro + "%";
         
         try {
-            Cliente cliente = new Cliente(filtroNome, filtroNome, filtro, filtro, filtro);
+            Cliente cliente = new Cliente(filtroNome, filtroNome, filtro, filtro, filtro, 0);
             con = new ConnectionFactoryComProperties().getConnection();
             sql = "select * from tb_cliente where nome like ? or sobrenome like ? or rg = ? or cpf = ?";
             
@@ -86,11 +87,14 @@ public class ClienteDao {
             List<Cliente> clientes = new ArrayList<Cliente>();
             while (rst.next()) {
                 cliente = new Cliente();
+                cliente.setIdCliente(rst.getInt("idcliente"));
                 cliente.setNome(rst.getString("nome"));
-                cliente.setSobreNome(rst.getString("sobrenome"));
+                cliente.setSobrenome(rst.getString("sobrenome"));
                 cliente.setRg(rst.getString("rg"));
                 cliente.setCpf(rst.getString("cpf"));
                 cliente.setEndereco(rst.getString("endereco"));
+                cliente.setSalario(rst.getDouble("salario"));
+                cliente.setordenarPor(ordenarPor);
                 
                 clientes.add(cliente);
             }
@@ -109,14 +113,15 @@ public class ClienteDao {
         PreparedStatement stmt = null;
         try{
             con = new ConnectionFactoryComProperties().getConnection();
-            sql = "update tb_cliente set nome = ?, sobrenome = ?, rg = ?, cpf = ?, Endereco = ? where idcliente = ?";
+            sql = "update tb_cliente set nome = ?, sobrenome = ?, rg = ?, cpf = ?, Endereco = ?, Salario = ? where idcliente = ?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, cliente.getNome());
-            stmt.setString(2, cliente.getSobreNome());
+            stmt.setString(2, cliente.getSobrenome());
             stmt.setString(3, cliente.getRg());
             stmt.setString(4, cliente.getCpf());
             stmt.setString(5, cliente.getEndereco());
-            stmt.setInt(6, cliente.getIdCliente());
+            stmt.setDouble(6, cliente.getSalario());
+            stmt.setInt(7, cliente.getIdCliente());
             
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -130,7 +135,6 @@ public class ClienteDao {
     public Cliente getCliente(int idCliente) throws SQLException{
         Connection con = null;
         PreparedStatement stmt = null;
-       
         
         try {
             Cliente cliente = new Cliente();
@@ -146,11 +150,11 @@ public class ClienteDao {
             if (rst.next()) {
                 cliente.setIdCliente(idCliente);
                 cliente.setNome(rst.getString("nome"));
-                cliente.setSobreNome(rst.getString("sobrenome"));
+                cliente.setSobrenome(rst.getString("sobrenome"));
                 cliente.setRg(rst.getString("rg"));
                 cliente.setCpf(rst.getString("cpf"));
                 cliente.setEndereco(rst.getString("endereco"));
-
+                cliente.setSalario(rst.getDouble("salario"));
             }
             
             return cliente;

@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/dao/ClienteDao.java</file>
-            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/dao/ConnectionFactoryComProperties.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/ContaCorrente.java</file>
             <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/Cliente.java</file>
-            <file>jar:file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/lib/junit_4/junit-4.12-sources.jar!/junit/framework/JUnit4TestAdapter.java</file>
-            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/test/ClienteTest.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/Conta.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/dao/bancoDeDados.properties</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/view/MainWindowView.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/view/ClienteView.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/ContaInvestimento.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/ClienteTableModel.java</file>
+            <file>file:/C:/Users/rafae/OneDrive/Faculdade/6%20Semestre/5%20Java%20II/InstituicaoFinanceira/src/model/ContaI.java</file>
         </group>
     </open-files>
 </project-private>

@@ -9,21 +9,13 @@ import model.ContaCorrente;
 import model.ContaInvestimento;
 import model.dao.ClienteDao;
 import model.dao.ContaDao;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author rfabini
  */
 public class ContaTest {
-    
-    
-    
     @Test
     public void inserirCC() throws SQLException{
         ContaCorrente cc = new ContaCorrente();
@@ -42,7 +34,6 @@ public class ContaTest {
         ContaCorrente cc = persist.getContaCorrente(7);
         cc.setSaldo(cc.getSaldo() * 1.01);
         persist.update(cc);
-  
     }
 
     @Test
@@ -63,6 +54,5 @@ public class ContaTest {
         ContaDao deletar = new ContaDao();
         ContaCorrente cc = deletar.getContaCorrente(7);
         deletar.delete(cc);
-  
     }
 }

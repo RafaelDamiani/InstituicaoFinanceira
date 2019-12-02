@@ -9,23 +9,26 @@ package model;
  *
  * @author rafae
  */
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
     public int idCliente;
     public String nome;
-    public String sobreNome;
+    public String sobrenome;
     public String rg;
     public String cpf;
     public String endereco;
+    public double salario;
+    public int ordenarPor; // 0 - nome | 1 - sobrenome | 2 - salario
     
     public Cliente() {
     }
     
-    public Cliente (String nome, String sobrenome, String rg, String cpf, String endereco) {
+    public Cliente (String nome, String sobrenome, String rg, String cpf, String endereco, double salario) {
         this.nome = nome;
-        this.sobreNome = sobrenome;
+        this.sobrenome = sobrenome;
         this.rg = rg;
         this.cpf = cpf;
         this.endereco = endereco;
+        this.salario = salario;
     }
     
     public int getIdCliente() {
@@ -44,12 +47,12 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getSobreNome() {
-        return sobreNome;
+    public String getSobrenome() {
+        return sobrenome;
     }
 
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getRg() {
@@ -74,5 +77,37 @@ public class Cliente {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+    
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public int ordenarPor() {
+        return ordenarPor;
+    }
+
+    public void setordenarPor(int ordenarPor) {
+        this.ordenarPor = ordenarPor;
+    }
+    
+    @Override
+    public int compareTo(Cliente cliente) {
+        if (this.ordenarPor == 0) 
+            return this.nome.compareTo(cliente.nome);
+        else if (this.ordenarPor == 1) 
+            return this.sobrenome.compareTo(cliente.sobrenome);
+        else {
+            if (this.salario < cliente.salario) 
+                    return 1;
+                else if (this.salario > cliente.salario)
+                    return -1;
+                else
+                    return 0;
+        }
     }
 }
