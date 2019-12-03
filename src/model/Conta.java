@@ -36,7 +36,6 @@ public class Conta implements ContaI {
         numConta = num;
     }
     
-    
     public double getDepositoInicial() {
         return depositoInicial;
     }

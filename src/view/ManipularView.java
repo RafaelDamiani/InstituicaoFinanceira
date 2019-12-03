@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.ManipularController;
+import javax.swing.JOptionPane;
+import model.Conta;
+
 /**
  *
  * @author rfabini
@@ -27,19 +31,155 @@ public class ManipularView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        lblCpf = new javax.swing.JLabel();
+        cpf = new javax.swing.JTextField();
+        btnFiltrar = new javax.swing.JButton();
+        lblValor = new javax.swing.JLabel();
+        valor = new javax.swing.JTextField();
+        saque = new javax.swing.JButton();
+        deposito = new javax.swing.JButton();
+        verSaldo = new javax.swing.JButton();
+        remunera = new javax.swing.JButton();
+
+        lblCpf.setText("CPF:");
+
+        btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
+
+        lblValor.setText("Valor:");
+
+        saque.setText("Saque");
+        saque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saqueActionPerformed(evt);
+            }
+        });
+
+        deposito.setText("Depósito");
+
+        verSaldo.setText("Ver Saldo");
+        verSaldo.setToolTipText("");
+        verSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verSaldoActionPerformed(evt);
+            }
+        });
+
+        remunera.setText("Remunera");
+        remunera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remuneraActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblValor)
+                                .addGap(18, 18, 18)
+                                .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblCpf)
+                                .addGap(27, 27, 27)
+                                .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36)
+                        .addComponent(btnFiltrar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(saque)
+                        .addGap(18, 18, 18)
+                        .addComponent(deposito)
+                        .addGap(12, 12, 12)
+                        .addComponent(verSaldo)
+                        .addGap(18, 18, 18)
+                        .addComponent(remunera)))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCpf)
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFiltrar))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblValor)
+                    .addComponent(valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saque)
+                    .addComponent(deposito)
+                    .addComponent(verSaldo)
+                    .addComponent(remunera))
+                .addContainerGap(301, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    Conta conta = new Conta();
+    
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        ManipularController manipularController = new ManipularController();
+        conta = manipularController.prepareGetContaByCpf(cpf.getText());
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void remuneraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remuneraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_remuneraActionPerformed
+
+    private void verSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSaldoActionPerformed
+        JOptionPane.showOptionDialog(
+                null, 
+                "Saldo: " + conta.getSaldo(), 
+                "Saldo", 
+                JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE,
+                null, 
+                null, 
+                null
+            );
+    }//GEN-LAST:event_verSaldoActionPerformed
+
+    private void saqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saqueActionPerformed
+        ManipularController manipularController = new ManipularController();        
+        manipularController.doSaque(Double.parseDouble(valor.getText()));
+    }//GEN-LAST:event_saqueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFiltrar;
+    private javax.swing.JTextField cpf;
+    private javax.swing.JButton deposito;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCpf;
+    private javax.swing.JLabel lblValor;
+    private javax.swing.JButton remunera;
+    private javax.swing.JButton saque;
+    private javax.swing.JTextField valor;
+    private javax.swing.JButton verSaldo;
     // End of variables declaration//GEN-END:variables
 }
