@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Users/mlcab/Dropbox/4°%20Período/LPOO%202/Trabalho/Trabalho%20Provisório/InstituicaoFinanceira/src/view/MainWindowView.java</file>
+            <file>file:/C:/Users/mlcab/Dropbox/4°%20Período/LPOO%202/Trabalho/Trabalho%20Provisório/InstituicaoFinanceira/src/controller/ClienteController.java</file>
+            <file>file:/C:/Users/mlcab/Dropbox/4°%20Período/LPOO%202/Trabalho/Trabalho%20Provisório/InstituicaoFinanceira/src/model/dao/ContaDao.java</file>
+            <file>file:/C:/Users/mlcab/Dropbox/4°%20Período/LPOO%202/Trabalho/Trabalho%20Provisório/InstituicaoFinanceira/src/model/Conta.java</file>
+        </group>
+>>>>>>> 01fceb0d2b70c77551b55c6c66f57a2e954306c8
     </open-files>
 </project-private>

@@ -5,7 +5,22 @@
  */
 package view;
 
+import model.dao.ConnectionFactoryComProperties;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import model.Cliente;
+import model.ContaCorrente;
+import model.ContaInvestimento;
+import model.dao.ContaDao;
 
 /**
  *
@@ -18,6 +33,28 @@ public class MainWindowView extends javax.swing.JFrame {
      */
     public MainWindowView() {
         initComponents();
+        
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = new ConnectionFactoryComProperties().getConnection();
+            List<String> strList = new ArrayList<String>();
+
+            String query = "SELECT * FROM tb_cliente";
+            stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                strList.add(rs.getString("nome") + " " + rs.getString("sobrenome"));
+            }
+            stmt.close();
+            con.close();
+            DefaultComboBoxModel defaultComboBoxModel = new DefaultComboBoxModel(strList.toArray());
+            jComboCliente.setModel(defaultComboBoxModel);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     /**
@@ -88,6 +125,11 @@ public class MainWindowView extends javax.swing.JFrame {
         jLabelClienteConta3.setText("Número da Conta: ");
 
         jButtonSalvarClienteConta.setText("Salvar");
+        jButtonSalvarClienteConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarClienteContaActionPerformed(evt);
+            }
+        });
 
         inputClienteConta1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         inputClienteConta1.setText("0.00");
@@ -112,46 +154,44 @@ public class MainWindowView extends javax.swing.JFrame {
         contasView1Layout.setHorizontalGroup(
             contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contasView1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCliente)
+                    .addComponent(jLabelConta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboConta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(contasView1Layout.createSequentialGroup()
+                .addGap(141, 141, 141)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contasView1Layout.createSequentialGroup()
+                .addContainerGap(110, Short.MAX_VALUE)
                 .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contasView1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelCliente)
-                            .addComponent(jLabelConta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboConta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(95, 95, 95)
+                        .addComponent(jButtonSalvarClienteConta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(contasView1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
                         .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(contasView1Layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(jButtonSalvarClienteConta, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(contasView1Layout.createSequentialGroup()
-                                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabelClienteConta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelClienteConta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabelClienteConta3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inputClienteConta3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputClienteConta1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputClienteConta2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 153, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contasView1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(78, 78, 78))
+                            .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabelClienteConta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelClienteConta1))
+                            .addComponent(jLabelClienteConta3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(inputClienteConta3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputClienteConta1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inputClienteConta2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(104, 104, 104))
         );
         contasView1Layout.setVerticalGroup(
             contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contasView1Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
                 .addGroup(contasView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -173,7 +213,7 @@ public class MainWindowView extends javax.swing.JFrame {
                     .addComponent(jLabelClienteConta3))
                 .addGap(28, 28, 28)
                 .addComponent(jButtonSalvarClienteConta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Contas", contasView1);
@@ -195,7 +235,7 @@ public class MainWindowView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 503, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,16 +244,10 @@ public class MainWindowView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jComboContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboContaActionPerformed
         String conta = (String) jComboConta.getSelectedItem();
         if(conta.equals("Conta Investimento")){
-            /*jLabelDepositoInicial.setVisible(false);
-            depositoInicial.setVisible(false);
-            jLabelLimite.setVisible(false);
-            limite.setVisible(false);
-            jLabelNumeroConta.setVisible(false);
-            numeroConta.setVisible(false);*/
             jLabelClienteConta1.setText("Montante Mínimo:  R$");
             jLabelClienteConta2.setText("Depósito Mínimo:   R$");
             jLabelClienteConta3.setText("Depósito Inicial:     R$");
@@ -221,12 +255,6 @@ public class MainWindowView extends javax.swing.JFrame {
             inputClienteConta3.setEditable(true);
             inputClienteConta3.setBackground(Color.WHITE);
         }else{
-            /*jLabelDepositoInicial.setVisible(true);
-            depositoInicial.setVisible(true);
-            jLabelLimite.setVisible(true);
-            limite.setVisible(true);
-            jLabelNumeroConta.setVisible(true);
-            numeroConta.setVisible(true);*/
             jLabelClienteConta1.setText("Depósito Inicial:     R$");
             jLabelClienteConta2.setText("Limite:                 R$");
             jLabelClienteConta3.setText("Número da Conta: ");
@@ -235,6 +263,139 @@ public class MainWindowView extends javax.swing.JFrame {
             inputClienteConta3.setBackground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_jComboContaActionPerformed
+
+    private void jButtonSalvarClienteContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarClienteContaActionPerformed
+        String conta = (String) jComboConta.getSelectedItem();
+        int idCliente = 0, numConta = 0;
+        String sobrenome = "", cpf = null,nomeCliente = null, sobrenomeCliente = null, rg = null, endereco = null;
+        Double salario = null;
+        if(conta.equals("Conta Corrente")){
+            ContaCorrente cc = new ContaCorrente();
+            String depIn = inputClienteConta1.getText();
+            Double di = Double.parseDouble(depIn);
+            cc.setDepositoInicial(di);
+            cc.setSaldo(di);
+            String limite = inputClienteConta2.getText();
+            Double lim = Double.parseDouble(limite);
+            cc.setLimite(lim);
+            String cliente = (String) jComboCliente.getSelectedItem();
+            String[] textoSeparado = cliente.split(" ");
+            System.out.println(textoSeparado[0] + " " + textoSeparado[1]);
+            String nome = textoSeparado[0];
+            for(int i = 1; i < textoSeparado.length; i++){
+                if(i == (textoSeparado.length - 1)){
+                    sobrenome += textoSeparado[i];
+                }else{
+                    sobrenome += textoSeparado[i] + " ";
+                }
+            }
+            System.out.println(textoSeparado[0]);
+            System.out.println(sobrenome);
+            //Busca id do cliente
+            Connection con = null;
+            PreparedStatement stmt = null;
+            try {
+                con = new ConnectionFactoryComProperties().getConnection();
+                //int idCliente;
+
+                String query = "SELECT * FROM tb_cliente WHERE nome = ? AND sobrenome = ?";
+                stmt = con.prepareStatement(query);
+                stmt.setString(1, nome);
+                stmt.setString(2, sobrenome);
+                
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    idCliente = rs.getInt("idcliente");
+                    cpf = rs.getString("cpf");
+                    nomeCliente = rs.getString("nome");
+                    sobrenomeCliente = rs.getString("sobrenome");
+                    rg = rs.getString("rg");
+                    endereco = rs.getString("endereco");
+                    salario = rs.getDouble("salario");
+                }
+
+                Cliente c = new Cliente(nomeCliente, sobrenomeCliente, rg, cpf, endereco, salario);
+                c.setIdCliente(idCliente);
+                cc.setCliente(c);
+                ContaDao cDao = new ContaDao();
+                cDao.insertContaCorrente(cc);
+                
+                //gera o numero da conta
+                query = "SELECT num_conta FROM tb_conta WHERE tipo = ? AND idcliente = ?";
+                stmt = con.prepareStatement(query);
+                stmt.setString(1, "CC");
+                stmt.setInt(2, idCliente);
+                rs = stmt.executeQuery();
+                while(rs.next()){
+                    numConta = rs.getInt("num_conta");
+                }
+                
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            String nc = Integer.toString(numConta);
+            inputClienteConta3.setText(nc);
+        }else{
+            ContaInvestimento ci = new ContaInvestimento();
+            String monMin = inputClienteConta1.getText();
+            Double mm = Double.parseDouble(monMin);
+            ci.setMontanteMinimo(mm);
+            String depMin = inputClienteConta2.getText();
+            Double dm = Double.parseDouble(depMin);
+            ci.setDepositoMinimo(dm);
+            String depIni = inputClienteConta3.getText();
+            Double di = Double.parseDouble(depIni);
+            ci.setDepositoInicial(di);
+            ci.setSaldo(di);
+            String cliente = (String) jComboCliente.getSelectedItem();
+            String[] textoSeparado = cliente.split(" ");
+            System.out.println(textoSeparado[0] + " " + textoSeparado[1]);
+            String nome = textoSeparado[0];
+            for(int i = 1; i < textoSeparado.length; i++){
+                if(i == (textoSeparado.length - 1)){
+                    sobrenome += textoSeparado[i];
+                }else{
+                    sobrenome += textoSeparado[i] + " ";
+                }
+            }
+            System.out.println(nome);
+            System.out.println(sobrenome);
+            //Busca id do cliente
+            Connection con = null;
+            PreparedStatement stmt = null;
+            try {
+                con = new ConnectionFactoryComProperties().getConnection();
+
+                String query = "SELECT * FROM tb_cliente WHERE nome = ? AND sobrenome = ?";
+                stmt = con.prepareStatement(query);
+                stmt.setString(1, nome);
+                stmt.setString(2, sobrenome);
+                
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    idCliente = rs.getInt("idcliente");
+                    cpf = rs.getString("cpf");
+                    nomeCliente = rs.getString("nome");
+                    sobrenomeCliente = rs.getString("sobrenome");
+                    rg = rs.getString("rg");
+                    endereco = rs.getString("endereco");
+                    salario = rs.getDouble("salario");
+                }
+
+                Cliente c = new Cliente(nomeCliente, sobrenomeCliente, rg, cpf, endereco, salario);
+                c.setIdCliente(idCliente);
+                ci.setCliente(c);
+                ContaDao cDao = new ContaDao();
+                cDao.insertContaInvestimento(ci);
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }//GEN-LAST:event_jButtonSalvarClienteContaActionPerformed
 
     /**
      * @param args the command line arguments
