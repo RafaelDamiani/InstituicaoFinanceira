@@ -134,6 +134,30 @@ public class ContaDao {
             con.close();
         }
     }
+    
+    public int getNumConta(int idCliente) throws SQLException{
+        Connection con = null;
+        PreparedStatement stmt = null;
+        int numConta = 0;
+        try{
+            con = new ConnectionFactoryComProperties().getConnection();
+            sql= "SELECT num_conta FROM tb_conta WHERE tipo = ? AND idcliente = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, "CC");
+            stmt.setInt(2, idCliente);
+            ResultSet rs = stmt.executeQuery();
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                numConta = rs.getInt("num_conta");
+            }
+            return numConta;
+        } catch(SQLException e) {
+             throw new RuntimeException(e);
+        } finally {
+            stmt.close();
+            con.close();
+        }
+    }
 
 }
 
