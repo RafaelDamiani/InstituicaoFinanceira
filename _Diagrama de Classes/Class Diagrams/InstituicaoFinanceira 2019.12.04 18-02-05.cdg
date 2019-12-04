@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="InstituicaoFinanceira">
+  <ClassDiagramComponents>
+    <Class name="ClienteController" package="controller" visibility="public" xPosition="962.0" yPosition="2395.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="prepareInsert" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="prepareDelete" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="prepareFilter" returnType="List&lt;Cliente&gt;" visibility="public">
+          <Argument type="String" name="filtro"/>
+          <Argument type="int" name="ordenarPor"/>
+        </Method>
+        <Method name="prepareUpdate" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ContaController" package="controller" visibility="public" xPosition="1311.0" yPosition="1696.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="prepareInsertContaCorrente" returnType="void" visibility="public">
+          <Argument type="ContaCorrente" name="cc"/>
+        </Method>
+        <Method name="prepareInsertContaInvestimento" returnType="void" visibility="public">
+          <Argument type="ContaInvestimento" name="ci"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Main" package="controller" visibility="public" xPosition="861.0" yPosition="1036.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MainWindowController" package="controller" visibility="public" xPosition="890.0" yPosition="665.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="initView" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ManipularController" package="controller" visibility="public" xPosition="1250.0" yPosition="767.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="prepareGetContaByCpf" returnType="Conta" visibility="public">
+          <Argument type="String" name="cpf"/>
+        </Method>
+        <Method name="doRemuneracao" returnType="void" visibility="public">
+          <Argument type="Conta" name="conta"/>
+        </Method>
+        <Method name="doSaque" returnType="boolean" visibility="public">
+          <Argument type="Conta" name="conta"/>
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="doDeposito" returnType="boolean" visibility="public">
+          <Argument type="Conta" name="conta"/>
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="updateSaldo" returnType="void" visibility="public">
+          <Argument type="Conta" name="conta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Cliente" package="model" visibility="public" xPosition="1533.0" yPosition="1992.0">
+      <Fields>
+        <Field name="idCliente" type="int" visibility="public"/>
+        <Field name="nome" type="String" visibility="public"/>
+        <Field name="sobrenome" type="String" visibility="public"/>
+        <Field name="rg" type="String" visibility="public"/>
+        <Field name="cpf" type="String" visibility="public"/>
+        <Field name="endereco" type="String" visibility="public"/>
+        <Field name="salario" type="double" visibility="public"/>
+        <Field name="ordenarPor" type="int" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="String" name="sobrenome"/>
+          <Argument type="String" name="rg"/>
+          <Argument type="String" name="cpf"/>
+          <Argument type="String" name="endereco"/>
+          <Argument type="double" name="salario"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getIdCliente" returnType="int" visibility="public"/>
+        <Method name="setIdCliente" returnType="void" visibility="public">
+          <Argument type="int" name="idCliente"/>
+        </Method>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="setNome" returnType="void" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+        <Method name="getSobrenome" returnType="String" visibility="public"/>
+        <Method name="setSobrenome" returnType="void" visibility="public">
+          <Argument type="String" name="sobrenome"/>
+        </Method>
+        <Method name="getRg" returnType="String" visibility="public"/>
+        <Method name="setRg" returnType="void" visibility="public">
+          <Argument type="String" name="rg"/>
+        </Method>
+        <Method name="getCpf" returnType="String" visibility="public"/>
+        <Method name="setCpf" returnType="void" visibility="public">
+          <Argument type="String" name="cpf"/>
+        </Method>
+        <Method name="getEndereco" returnType="String" visibility="public"/>
+        <Method name="setEndereco" returnType="void" visibility="public">
+          <Argument type="String" name="endereco"/>
+        </Method>
+        <Method name="getSalario" returnType="double" visibility="public"/>
+        <Method name="setSalario" returnType="void" visibility="public">
+          <Argument type="double" name="salario"/>
+        </Method>
+        <Method name="ordenarPor" returnType="int" visibility="public"/>
+        <Method name="setordenarPor" returnType="void" visibility="public">
+          <Argument type="int" name="ordenarPor"/>
+        </Method>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ClienteTableModel" package="model" visibility="public" xPosition="2514.0" yPosition="2241.0">
+      <Fields>
+        <Field name="dados" type="List&lt;Cliente&gt;" visibility="private"/>
+        <Field name="colunas" type="String[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getColumnName" returnType="String" visibility="public">
+          <Argument type="int" name="column"/>
+        </Method>
+        <Method name="getRowCount" returnType="int" visibility="public"/>
+        <Method name="getColumnCount" returnType="int" visibility="public"/>
+        <Method name="getValueAt" returnType="Object" visibility="public">
+          <Argument type="int" name="rowIndex"/>
+          <Argument type="int" name="columnIndex"/>
+        </Method>
+        <Method name="setValueAt" returnType="void" visibility="public">
+          <Argument type="Object" name="aValue"/>
+          <Argument type="int" name="rowIndex"/>
+          <Argument type="int" name="columnIndex"/>
+        </Method>
+        <Method name="addLinha" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="removeLinha" returnType="void" visibility="public">
+          <Argument type="int" name="linha"/>
+        </Method>
+        <Method name="removeCliente" returnType="void" visibility="public">
+          <Argument type="int" name="linha"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Conta" package="model" visibility="public" xPosition="1670.0" yPosition="988.0">
+      <Fields>
+        <Field name="depositoInicial" type="double" visibility="protected"/>
+        <Field name="saldo" type="double" visibility="protected"/>
+        <Field name="cliente" type="Cliente" visibility="protected"/>
+        <Field name="numConta" type="int" visibility="protected"/>
+        <Field name="tipo" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getCliente" returnType="Cliente" visibility="public"/>
+        <Method name="setCliente" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="getTipo" returnType="String" visibility="public"/>
+        <Method name="setTipo" returnType="void" visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Method>
+        <Method name="setNumConta" returnType="void" visibility="public">
+          <Argument type="int" name="num"/>
+        </Method>
+        <Method name="getDepositoInicial" returnType="double" visibility="public"/>
+        <Method name="setDepositoInicial" returnType="void" visibility="public">
+          <Argument type="double" name="depositoInicial"/>
+        </Method>
+        <Method name="getDono" returnType="Cliente" visibility="public"/>
+        <Method name="getNumero" returnType="int" visibility="public"/>
+        <Method name="getSaldo" returnType="double" visibility="public"/>
+        <Method name="setSaldo" returnType="void" visibility="public">
+          <Argument type="double" name="saldo"/>
+        </Method>
+        <Method name="remunera" returnType="void" visibility="public"/>
+        <Method name="deposita" returnType="boolean" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="saca" returnType="boolean" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ContaCorrente" package="model" visibility="public" xPosition="1281.0" yPosition="1138.0">
+      <Fields>
+        <Field name="limite" type="double" visibility="public"/>
+        <Field name="numeroConta" type="int" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getDepositoInicial" returnType="double" visibility="public"/>
+        <Method name="setDepositoInicial" returnType="void" visibility="public">
+          <Argument type="double" name="depositoInicial"/>
+        </Method>
+        <Method name="getLimite" returnType="double" visibility="public"/>
+        <Method name="setLimite" returnType="void" visibility="public">
+          <Argument type="double" name="limite"/>
+        </Method>
+        <Method name="getNumeroConta" returnType="int" visibility="public"/>
+        <Method name="saca" returnType="boolean" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="remunera" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ContaInvestimento" package="model" visibility="public" xPosition="2073.0" yPosition="1138.0">
+      <Fields>
+        <Field name="montanteMinimo" type="double" visibility="public"/>
+        <Field name="depositoMinimo" type="double" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getMontanteMinimo" returnType="double" visibility="public"/>
+        <Method name="setMontanteMinimo" returnType="void" visibility="public">
+          <Argument type="double" name="montanteMinimo"/>
+        </Method>
+        <Method name="getDepositoMinimo" returnType="double" visibility="public"/>
+        <Method name="setDepositoMinimo" returnType="void" visibility="public">
+          <Argument type="double" name="depositoMinimo"/>
+        </Method>
+        <Method name="deposita" returnType="boolean" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="saca" returnType="boolean" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="remunera" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ClienteDao" package="model.dao" visibility="public" xPosition="932.0" yPosition="2096.0">
+      <Fields>
+        <Field name="sql" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="insert" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="delete" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="lista" returnType="List&lt;Cliente&gt;" visibility="public">
+          <Argument type="String" name="filtro"/>
+          <Argument type="int" name="ordenarPor"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="getCliente" returnType="Cliente" visibility="public">
+          <Argument type="int" name="idCliente"/>
+        </Method>
+        <Method name="clienteNomeSobrenome" returnType="Cliente" visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="String" name="sobrenome"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ConnectionFactoryComProperties" package="model.dao" visibility="public" xPosition="861.0" yPosition="830.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="getConnection" returnType="Connection" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ContaDao" package="model.dao" visibility="public" xPosition="2035.0" yPosition="1625.0">
+      <Fields>
+        <Field name="sql" type="String" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getContaCorrente" returnType="ContaCorrente" visibility="public">
+          <Argument type="long" name="numeroConta"/>
+        </Method>
+        <Method name="insertContaCorrente" returnType="void" visibility="public">
+          <Argument type="ContaCorrente" name="cc"/>
+        </Method>
+        <Method name="insertContaInvestimento" returnType="void" visibility="public">
+          <Argument type="ContaInvestimento" name="ci"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="Conta" name="conta"/>
+        </Method>
+        <Method name="delete" returnType="void" visibility="public">
+          <Argument type="Conta" name="conta"/>
+        </Method>
+        <Method name="getNumConta" returnType="int" visibility="public">
+          <Argument type="int" name="idCliente"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ManipularDao" package="model.dao" visibility="public" xPosition="1708.0" yPosition="749.0">
+      <Fields>
+        <Field name="sql" type="String" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getContaByCpf" returnType="Conta" visibility="public">
+          <Argument type="String" name="cpf"/>
+        </Method>
+        <Method name="updateSaldo" returnType="void" visibility="public">
+          <Argument type="Conta" name="conta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ClienteView" package="view" visibility="public" xPosition="2456.0" yPosition="1138.0">
+      <Fields>
+        <Field name="tableModel" type="ClienteTableModel" visibility="package"/>
+        <Field name="btnAtualizar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnExcluir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnFiltrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="btnIncluir" type="javax.swing.JButton" visibility="private"/>
+        <Field name="buttonGroup1" type="javax.swing.ButtonGroup" visibility="private"/>
+        <Field name="cpf" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="endereco" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="filtro" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jDialog1" type="javax.swing.JDialog" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="jScrollPane1" type="javax.swing.JScrollPane" visibility="private"/>
+        <Field name="lblCpf" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblEndereco" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblFiltro" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblNome" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblOrdernarPor" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblRg" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSalario" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblSobrenome" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="nome" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="ordenarPor" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="rg" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="salario" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="sobrenome" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="tableCliente" type="javax.swing.JTable" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="validaNomeSizeMax" returnType="boolean" visibility="private"/>
+        <Method name="validaSobrenomeSizeMax" returnType="boolean" visibility="private"/>
+        <Method name="validaSalario" returnType="boolean" visibility="private"/>
+        <Method name="validaRG" returnType="boolean" visibility="private"/>
+        <Method name="validaCPF" returnType="boolean" visibility="private"/>
+        <Method name="validaNomeSizeMin" returnType="boolean" visibility="private"/>
+        <Method name="validaSobrenomeSizeMin" returnType="boolean" visibility="private"/>
+        <Method name="validaRGSizeMin" returnType="boolean" visibility="private"/>
+        <Method name="validaCPFSizeMin" returnType="boolean" visibility="private"/>
+        <Method name="validaEnderecoSizeMin" returnType="boolean" visibility="private"/>
+        <Method name="validaEnderecoSizeMax" returnType="boolean" visibility="private"/>
+        <Method name="validaSalarioSizeMin" returnType="boolean" visibility="private"/>
+        <Method name="validacoes" returnType="boolean" visibility="private"/>
+        <Method name="btnIncluirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="filtroActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnFiltrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="ordenarPorActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="salarioActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnExcluirActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="btnAtualizarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="tableClienteMouseClicked" returnType="void" visibility="private">
+          <Argument type="java.awt.event.MouseEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ContaView" package="view" visibility="public" xPosition="861.0" yPosition="119.0">
+      <Fields>
+        <Field name="inputClienteConta1" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="inputClienteConta2" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="inputClienteConta3" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="jButtonSalvarClienteConta" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jComboCliente" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jComboConta" type="javax.swing.JComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="jLabel1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabelCliente" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabelClienteConta1" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabelClienteConta2" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabelClienteConta3" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jLabelConta" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jComboContaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="inputClienteConta1ActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButtonSalvarClienteContaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jComboClienteActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="MainWindowView" package="view" visibility="public" xPosition="1946.0" yPosition="93.0">
+      <Fields>
+        <Field name="clienteView1" type="view.ClienteView" visibility="private"/>
+        <Field name="clienteView2" type="view.ClienteView" visibility="private"/>
+        <Field name="clienteView3" type="view.ClienteView" visibility="private"/>
+        <Field name="clienteView5" type="view.ClienteView" visibility="private"/>
+        <Field name="clientesView1" type="view.ClienteView" visibility="private"/>
+        <Field name="contaView2" type="view.ContaView" visibility="private"/>
+        <Field name="jPasswordField1" type="javax.swing.JPasswordField" visibility="private"/>
+        <Field name="jTabbedPane1" type="javax.swing.JTabbedPane" visibility="private"/>
+        <Field name="manipularView1" type="view.ManipularView" visibility="private"/>
+        <Field name="manipularView3" type="view.ManipularView" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="jComboContaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="jButtonSalvarClienteContaActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ManipularView" package="view" visibility="public" xPosition="2035.0" yPosition="623.0">
+      <Fields>
+        <Field name="conta" type="Conta" visibility="package"/>
+        <Field name="btnFiltrar" type="javax.swing.JButton" visibility="private"/>
+        <Field name="cpf" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="deposito" type="javax.swing.JButton" visibility="private"/>
+        <Field name="jPanel1" type="javax.swing.JPanel" visibility="private"/>
+        <Field name="lblCpf" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="lblValor" type="javax.swing.JLabel" visibility="private"/>
+        <Field name="remunera" type="javax.swing.JButton" visibility="private"/>
+        <Field name="saque" type="javax.swing.JButton" visibility="private"/>
+        <Field name="valor" type="javax.swing.JTextField" visibility="private"/>
+        <Field name="verSaldo" type="javax.swing.JButton" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
+        <Method name="btnFiltrarActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="remuneraActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="verSaldoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="saqueActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="depositoActionPerformed" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="ContaI" package="model" visibility="public" xPosition="842.0" yPosition="1582.0">
+      <Methods>
+        <Method name="deposita" returnType="boolean" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="saca" returnType="boolean" visibility="public">
+          <Argument type="double" name="valor"/>
+        </Method>
+        <Method name="getDono" returnType="Cliente" visibility="public"/>
+        <Method name="getNumero" returnType="int" visibility="public"/>
+        <Method name="getSaldo" returnType="double" visibility="public"/>
+        <Method name="remunera" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="model.ContaCorrente" target="model.Conta"/>
+    <UseRelation source="model.dao.ContaDao" target="model.ContaInvestimento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="controller.ContaController" target="model.ContaInvestimento" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.Conta" target="model.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="model.Conta" target="model.ContaI"/>
+    <HasRelation name="cliente" source="model.Conta" target="model.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="controller.ClienteController" target="model.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.dao.ContaDao" target="model.ContaCorrente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.Cliente" target="model.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="controller.ContaController" target="model.ContaCorrente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.ClienteTableModel" target="model.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.dao.ManipularDao" target="model.Conta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.ContaI" target="model.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.dao.ClienteDao" target="model.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="conta" source="view.ManipularView" target="model.Conta" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="dados" source="model.ClienteTableModel" target="model.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Cliente&gt;"/>
+    <UseRelation source="controller.ManipularController" target="model.Conta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="model.dao.ContaDao" target="model.Conta" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="model.ContaInvestimento" target="model.Conta"/>
+    <HasRelation name="tableModel" source="view.ClienteView" target="model.ClienteTableModel" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
