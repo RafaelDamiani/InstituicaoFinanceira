@@ -29,5 +29,6 @@ limite decimal(10,2), -- Aplicável apenas para Conta de Corrente
 montante_min decimal(10,2),-- Aplicável apenas para Conta de Investimento
 deposito_min decimal(10,2), -- Aplicável apenas para Conta de Investimento
 constraint pkConta primary key (num_conta),
-constraint fkClienteConta foreign key (idcliente) references tb_cliente(idcliente)
+constraint fkClienteConta foreign key (idcliente) references tb_cliente(idcliente),
+constraint ukConta unique (idcliente, tipo) 
 );
