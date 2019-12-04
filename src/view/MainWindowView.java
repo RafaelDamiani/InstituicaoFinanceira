@@ -60,12 +60,15 @@ public class MainWindowView extends javax.swing.JFrame {
         clienteView1 = new view.ClienteView();
         clienteView3 = new view.ClienteView();
         clienteView2 = new view.ClienteView();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         clientesView1 = new view.ClienteView();
-        clienteView4 = new view.ClienteView();
+        clienteView5 = new view.ClienteView();
         manipularView1 = new view.ManipularView();
         contaView2 = new view.ContaView();
         manipularView3 = new view.ManipularView();
+
+        jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,14 +78,15 @@ public class MainWindowView extends javax.swing.JFrame {
             clientesView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(clientesView1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(clienteView4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(clienteView5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         clientesView1Layout.setVerticalGroup(
             clientesView1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, clientesView1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(clienteView4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(clientesView1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(clienteView5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clientes", clientesView1);
@@ -101,7 +105,7 @@ public class MainWindowView extends javax.swing.JFrame {
             .addGroup(manipularView1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(contaView2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Conta", manipularView1);
@@ -115,7 +119,7 @@ public class MainWindowView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
         );
 
         pack();
@@ -135,9 +139,10 @@ public class MainWindowView extends javax.swing.JFrame {
     private view.ClienteView clienteView1;
     private view.ClienteView clienteView2;
     private view.ClienteView clienteView3;
-    private view.ClienteView clienteView4;
+    private view.ClienteView clienteView5;
     private view.ClienteView clientesView1;
     private view.ContaView contaView2;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private view.ManipularView manipularView1;
     private view.ManipularView manipularView3;

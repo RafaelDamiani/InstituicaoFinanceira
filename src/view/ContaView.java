@@ -57,8 +57,11 @@ public class ContaView extends javax.swing.JPanel {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+        
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,6 +129,11 @@ public class ContaView extends javax.swing.JPanel {
         jLabelCliente.setText("Cliente:");
 
         jComboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um cliente..." }));
+        jComboCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboClienteActionPerformed(evt);
+            }
+        });
 
         jLabelConta.setText("Conta:");
 
@@ -332,6 +340,10 @@ public class ContaView extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jButtonSalvarClienteContaActionPerformed
+
+    private void jComboClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
