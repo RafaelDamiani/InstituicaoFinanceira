@@ -24,9 +24,8 @@ public class ManipularController {
         }
     }
 
-    public void doSaque(double saque) {
+    public void doSaque(String tipo, double saque) {
         try {
-            
             Conta conta = new Conta();
             ManipularDao manipularDao = new ManipularDao();
             manipularDao.updateSaldo(conta);

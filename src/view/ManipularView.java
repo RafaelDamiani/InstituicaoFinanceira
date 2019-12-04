@@ -166,7 +166,7 @@ public class ManipularView extends javax.swing.JPanel {
 
     private void saqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saqueActionPerformed
         ManipularController manipularController = new ManipularController();        
-        manipularController.doSaque(Double.parseDouble(valor.getText()));
+        manipularController.doSaque(conta.getTipo(), Double.parseDouble(valor.getText()));
     }//GEN-LAST:event_saqueActionPerformed
 
 
