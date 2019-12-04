@@ -67,8 +67,6 @@ public class ContaDao {
             stmt.setDouble(4, cc.getDepositoInicial());
             stmt.setDouble(5, cc.getLimite());
             stmt.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         } finally {
             stmt.close();
             con.close();
@@ -89,9 +87,7 @@ public class ContaDao {
             stmt.setDouble(5, ci.getMontanteMinimo());
             stmt.setDouble(6, ci.getDepositoMinimo());
             stmt.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
+        }finally {
             stmt.close();
             con.close();
         }

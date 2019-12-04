@@ -8,21 +8,30 @@ package controller;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Cliente;
 import model.dao.ClienteDao;
+import view.ClienteView;
 
 /**
  *
  * @author rafae
  */
 public class ClienteController {
+    private ClienteView cv;
+    public ClienteController(ClienteView cv){
+        this.cv = cv;
+    }
+    
+
     
     public void prepareInsert(Cliente cliente) {
         try {
             ClienteDao clienteDao = new ClienteDao();
             clienteDao.insert(cliente);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            if (e.getMessage().contains("uk"))
+                JOptionPane.showMessageDialog(cv, "Esse cpf já foi cadastrado!");
         }
     }
 
@@ -51,7 +60,12 @@ public class ClienteController {
             ClienteDao clienteDao = new ClienteDao();
             clienteDao.update(cliente);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            if (e.getMessage().contains("uk"))
+                JOptionPane.showMessageDialog(cv, "Esse cpf já foi cadastrado!");
         }
+    }
+    
+    public ClienteController(){
+        
     }
 }

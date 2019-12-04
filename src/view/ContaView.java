@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import model.Cliente;
 import model.ContaCorrente;
 import model.ContaInvestimento;
@@ -293,10 +294,12 @@ public class ContaView extends javax.swing.JPanel {
             } catch (SQLException ex) {
                 System.out.println("Problema ao busca id do cliente" + ex.getMessage());
             }
-            contaController.prepareInsertContaCorrente(cc);
+            
+            
             //gera o numero da conta
             ContaDao contaDao = new ContaDao();
-            try {
+            try {      
+                contaController.prepareInsertContaCorrente(cc, this);
                 numConta = contaDao.getNumConta(clienteDao.clienteNomeSobrenome(nome, sobrenome).getIdCliente());
             } catch (SQLException ex) {
                 System.out.println("Problema ao gerar numero da conta" + ex.getMessage());
@@ -334,7 +337,7 @@ public class ContaView extends javax.swing.JPanel {
             ClienteDao clienteDao = new ClienteDao();
             try {
                 ci.setCliente(clienteDao.clienteNomeSobrenome(nome, sobrenome));
-                contaController.prepareInsertContaInvestimento(ci);
+                contaController.prepareInsertContaInvestimento(ci, this);
             } catch (SQLException ex) {
                 System.out.println("Problema ao busca id do cliente" + ex.getMessage());
             }

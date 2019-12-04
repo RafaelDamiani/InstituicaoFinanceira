@@ -34,8 +34,6 @@ public class ClienteDao {
             stmt.setString(5, cliente.getEndereco());
             stmt.setDouble(6, cliente.getSalario());
             stmt.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         } finally {
             stmt.close();
             con.close();
@@ -124,8 +122,6 @@ public class ClienteDao {
             stmt.setInt(7, cliente.getIdCliente());
             
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         } finally {
             stmt.close();
             con.close();

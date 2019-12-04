@@ -97,7 +97,7 @@
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="nome" alignment="0" pref="261" max="32767" attributes="0"/>
+                                      <Component id="nome" alignment="0" max="32767" attributes="0"/>
                                       <Component id="sobrenome" alignment="0" max="32767" attributes="0"/>
                                       <Component id="rg" alignment="0" max="32767" attributes="0"/>
                                       <Component id="cpf" alignment="0" max="32767" attributes="0"/>

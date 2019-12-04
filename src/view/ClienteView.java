@@ -548,10 +548,11 @@ public class ClienteView extends javax.swing.JPanel {
     }
     
     private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+
         if (!validacoes())
             return;
 
-        ClienteController clienteController = new ClienteController();
+        ClienteController clienteController = new ClienteController(this);
         Cliente cliente = new Cliente(nome.getText(), sobrenome.getText(), rg.getText(), cpf.getText(), endereco.getText(), Double.parseDouble(salario.getText()));
         clienteController.prepareInsert(cliente);
     }//GEN-LAST:event_btnIncluirActionPerformed
@@ -565,7 +566,7 @@ public class ClienteView extends javax.swing.JPanel {
             tableModel.removeLinha(0);
         }
         
-        ClienteController clienteController = new ClienteController();
+        ClienteController clienteController = new ClienteController(this);
         List<Cliente> clientes = clienteController.prepareFilter(filtro.getText(), ordenarPor.getSelectedIndex());
         
         Collections.sort(clientes);
@@ -622,7 +623,7 @@ public class ClienteView extends javax.swing.JPanel {
         int row = source.rowAtPoint( evt.getPoint() );
         String cpf = (String) source.getModel().getValueAt(row, 3);
         
-        ClienteController clienteController = new ClienteController();
+        ClienteController clienteController = new ClienteController(this);
         List<Cliente> clientes = clienteController.prepareFilter(cpf, ordenarPor.getSelectedIndex());
         Cliente cliente = clientes.get(0);
         this.nome.setText("");
