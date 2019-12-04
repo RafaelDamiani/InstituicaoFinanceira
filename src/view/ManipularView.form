@@ -86,7 +86,7 @@
                       <Component id="verSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="remunera" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="301" max="32767" attributes="0"/>
+                  <EmptySpace pref="55" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,6 +117,7 @@
         <Component class="javax.swing.JButton" name="saque">
           <Properties>
             <Property name="text" type="java.lang.String" value="Saque"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saqueActionPerformed"/>
@@ -125,12 +126,17 @@
         <Component class="javax.swing.JButton" name="deposito">
           <Properties>
             <Property name="text" type="java.lang.String" value="Dep&#xf3;sito"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="depositoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="verSaldo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ver Saldo"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verSaldoActionPerformed"/>
@@ -139,6 +145,7 @@
         <Component class="javax.swing.JButton" name="remunera">
           <Properties>
             <Property name="text" type="java.lang.String" value="Remunera"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="remuneraActionPerformed"/>

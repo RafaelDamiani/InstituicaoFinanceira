@@ -22,7 +22,7 @@ public class ContaTest {
         cc.setDepositoInicial(1500.00);
         cc.setLimite(400.00);
         cc.setSaldo(1500.00);        
-        cc.setCliente(new ClienteDao().getCliente(2));
+        cc.setCliente(new ClienteDao().getCliente(30));
         cc.setTipo("CC");
         ContaDao persist = new ContaDao();
         persist.insertContaCorrente(cc);        
@@ -43,7 +43,7 @@ public class ContaTest {
         ci.setSaldo(1500.00);   
         ci.setDepositoMinimo(200);
         ci.setMontanteMinimo(600);
-        ci.setCliente(new ClienteDao().getCliente(2));
+        ci.setCliente(new ClienteDao().getCliente(32));
         ci.setTipo("CI");
         ContaDao persist = new ContaDao();
         persist.insertContaInvestimento(ci);        

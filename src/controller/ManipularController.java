@@ -23,10 +23,30 @@ public class ManipularController {
             throw new RuntimeException(e);
         }
     }
+    
+    public void doRemuneracao(Conta conta) {
+        conta.remunera();
+        updateSaldo(conta);
+    }
+    
+    public boolean doSaque(Conta conta, double valor) {
+        if (!conta.saca(valor))
+            return false;
+        conta.setSaldo(conta.getSaldo() - valor);
+        updateSaldo(conta);
+        return true;
+    }
 
-    public void doSaque(String tipo, double saque) {
+    public boolean doDeposito(Conta conta, double valor) {
+        if (!conta.deposita(valor))
+            return false;
+        conta.setSaldo(conta.getSaldo() + valor);
+        updateSaldo(conta);
+        return true;
+    }
+    
+    public void updateSaldo(Conta conta) {
         try {
-            Conta conta = new Conta();
             ManipularDao manipularDao = new ManipularDao();
             manipularDao.updateSaldo(conta);
         } catch (SQLException e) {
