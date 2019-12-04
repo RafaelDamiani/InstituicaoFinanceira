@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Conta;
+import model.ContaCorrente;
+import model.ContaInvestimento;
 
 /**
  *
@@ -33,11 +35,24 @@ public class ManipularDao {
             ResultSet rst = stmt.executeQuery();    
             
             if (rst.next()) {
-                conta.setNumConta(rst.getInt("num_conta"));
-                conta.setSaldo(rst.getDouble("saldo"));
-                conta.setTipo("tipo");
+                if (rst.getString("tipo").equals("CC")) {
+                    ContaCorrente cc = new ContaCorrente();
+                    cc.setNumConta(rst.getInt("num_conta"));
+                    cc.setSaldo(rst.getDouble("saldo"));
+                    cc.setTipo(rst.getString("tipo"));
+                    cc.setLimite(rst.getDouble("limite"));
+                    conta = cc;
+                } else {
+                    ContaInvestimento ci = new ContaInvestimento();
+                    ci.setNumConta(rst.getInt("num_conta"));
+                    ci.setSaldo(rst.getDouble("saldo"));
+                    ci.setTipo(rst.getString("tipo"));
+                    ci.setDepositoMinimo(rst.getDouble("deposito_min"));
+                    ci.setMontanteMinimo(rst.getDouble("montante_min"));
+                    conta = ci;
+                }
             }
-            
+
             return conta;
         } catch(SQLException e) {
              throw new RuntimeException(e);

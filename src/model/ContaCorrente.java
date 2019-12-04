@@ -33,11 +33,13 @@ public class ContaCorrente extends Conta {
         return numeroConta;
     }
     
+    @Override
     public boolean saca(double valor) {
-        return true;
+        return valor <= this.limite;
     }
     
+    @Override
     public void remunera() {
-        
+        this.saldo *= 1.1;
     }
 }

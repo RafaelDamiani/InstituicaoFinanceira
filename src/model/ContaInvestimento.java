@@ -28,16 +28,23 @@ public class ContaInvestimento extends Conta {
     public void setDepositoMinimo(double depositoMinimo) {
         this.depositoMinimo = depositoMinimo;
     }
-    
+
+    @Override
     public boolean deposita(double valor) {
-        return true;
+        if (valor >= this.depositoMinimo)
+            return super.deposita(valor);
+        return false;
     }
     
+    @Override
     public boolean saca(double valor) {
-        return true;
+        if (this.saldo - valor >= this.montanteMinimo)
+            return super.saca(valor);
+        return false;
     }
     
+    @Override
     public void remunera() {
-        
+        this.saldo *= 1.2;
     }
 }

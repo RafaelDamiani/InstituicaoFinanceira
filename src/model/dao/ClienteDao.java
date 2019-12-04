@@ -165,4 +165,40 @@ public class ClienteDao {
             con.close();
         }
     }
+    
+    public Cliente clienteNomeSobrenome(String nome, String sobrenome) throws SQLException{
+        int idCliente = 0;
+        String cpf = null,nomeCliente = null, sobrenomeCliente = null, rg = null, endereco = null;
+        Double salario = null;
+        Connection con = null;
+        PreparedStatement stmt = null;
+            try {
+                con = new ConnectionFactoryComProperties().getConnection();
+
+                String query = "SELECT * FROM tb_cliente WHERE nome = ? AND sobrenome = ?";
+                stmt = con.prepareStatement(query);
+                stmt.setString(1, nome);
+                stmt.setString(2, sobrenome);
+                
+                ResultSet rs = stmt.executeQuery();
+                while(rs.next()){
+                    idCliente = rs.getInt("idcliente");
+                    cpf = rs.getString("cpf");
+                    nomeCliente = rs.getString("nome");
+                    sobrenomeCliente = rs.getString("sobrenome");
+                    rg = rs.getString("rg");
+                    endereco = rs.getString("endereco");
+                    salario = rs.getDouble("salario");
+                }
+
+                Cliente c = new Cliente(nomeCliente, sobrenomeCliente, rg, cpf, endereco, salario);
+                c.setIdCliente(idCliente);
+                return c;
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            } finally {
+                stmt.close(); 
+                con.close();
+            }
+    }
 }

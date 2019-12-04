@@ -9,10 +9,8 @@ import controller.ClienteController;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import model.Cliente;
 import model.ClienteTableModel;
 
@@ -107,6 +105,11 @@ public class ClienteView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableCliente);
 
         lblFiltro.setText("Filtro:");
@@ -599,7 +602,7 @@ public class ClienteView extends javax.swing.JPanel {
                 tableModel.removeCliente(linhaSelecionada);
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
-
+            
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         int linhaSelecionada = tableCliente.getSelectedRow();
         if (tableCliente.getSelectedRow() != -1) {
@@ -613,6 +616,30 @@ public class ClienteView extends javax.swing.JPanel {
             tableModel.setValueAt(salario.getText(), linhaSelecionada, 5);
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void tableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClienteMouseClicked
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        String cpf = (String) source.getModel().getValueAt(row, 3);
+        
+        ClienteController clienteController = new ClienteController();
+        List<Cliente> clientes = clienteController.prepareFilter(cpf, ordenarPor.getSelectedIndex());
+        Cliente cliente = clientes.get(0);
+        this.nome.setText("");
+        this.sobrenome.setText("");
+        this.rg.setText("");
+        this.cpf.setText("");
+        this.endereco.setText("");
+        this.salario.setText("");        
+        
+        this.nome.setText(cliente.getNome());
+        this.sobrenome.setText(cliente.getSobrenome());
+        this.rg.setText(cliente.getRg());
+        this.cpf.setText(cliente.getCpf());
+        this.endereco.setText(cliente.getEndereco());
+        String salarioStr = String.valueOf(cliente.getSalario());
+        this.salario.setText(salarioStr);        
+    }//GEN-LAST:event_tableClienteMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizar;

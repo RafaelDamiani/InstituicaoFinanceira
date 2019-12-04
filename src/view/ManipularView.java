@@ -6,6 +6,7 @@
 package view;
 
 import controller.ManipularController;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import model.Conta;
 
@@ -54,6 +55,7 @@ public class ManipularView extends javax.swing.JPanel {
         lblValor.setText("Valor:");
 
         saque.setText("Saque");
+        saque.setEnabled(false);
         saque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saqueActionPerformed(evt);
@@ -61,9 +63,16 @@ public class ManipularView extends javax.swing.JPanel {
         });
 
         deposito.setText("Depósito");
+        deposito.setEnabled(false);
+        deposito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depositoActionPerformed(evt);
+            }
+        });
 
         verSaldo.setText("Ver Saldo");
         verSaldo.setToolTipText("");
+        verSaldo.setEnabled(false);
         verSaldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verSaldoActionPerformed(evt);
@@ -71,6 +80,7 @@ public class ManipularView extends javax.swing.JPanel {
         });
 
         remunera.setText("Remunera");
+        remunera.setEnabled(false);
         remunera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 remuneraActionPerformed(evt);
@@ -125,7 +135,7 @@ public class ManipularView extends javax.swing.JPanel {
                     .addComponent(deposito)
                     .addComponent(verSaldo)
                     .addComponent(remunera))
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -145,16 +155,59 @@ public class ManipularView extends javax.swing.JPanel {
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         ManipularController manipularController = new ManipularController();
         conta = manipularController.prepareGetContaByCpf(cpf.getText());
+        if (conta.getNumero() > 0) {
+            JOptionPane.showOptionDialog(
+                    null, 
+                    "Usuário encontrado!", 
+                    "Usuário", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            saque.setEnabled(true);
+            deposito.setEnabled(true);
+            verSaldo.setEnabled(true);
+            remunera.setEnabled(true);
+        }
+        else {
+            JOptionPane.showOptionDialog(
+                    null, 
+                    "Usuário inexistente!", 
+                    "Usuário", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            saque.setEnabled(false);
+            deposito.setEnabled(false);
+            verSaldo.setEnabled(false);
+            remunera.setEnabled(false);
+        }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void remuneraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remuneraActionPerformed
-        // TODO add your handling code here:
+        ManipularController manipularController = new ManipularController();        
+        manipularController.doRemuneracao(conta);
+        JOptionPane.showOptionDialog(
+                null, 
+                "Usuário Remunerado!", 
+                "Remuneração", 
+                JOptionPane.DEFAULT_OPTION, 
+                JOptionPane.INFORMATION_MESSAGE,
+                null, 
+                null, 
+                null
+            );
     }//GEN-LAST:event_remuneraActionPerformed
 
     private void verSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verSaldoActionPerformed
         JOptionPane.showOptionDialog(
                 null, 
-                "Saldo: " + conta.getSaldo(), 
+                "Saldo: " + new DecimalFormat("#.##").format(conta.getSaldo()), 
                 "Saldo", 
                 JOptionPane.DEFAULT_OPTION, 
                 JOptionPane.INFORMATION_MESSAGE,
@@ -165,9 +218,130 @@ public class ManipularView extends javax.swing.JPanel {
     }//GEN-LAST:event_verSaldoActionPerformed
 
     private void saqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saqueActionPerformed
-        ManipularController manipularController = new ManipularController();        
-        manipularController.doSaque(Double.parseDouble(valor.getText()));
+        try {
+            ManipularController manipularController = new ManipularController();        
+            boolean result = manipularController.doSaque(conta, Double.parseDouble(valor.getText()));
+            if (result)
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "Saque Realizado!", 
+                    "Saque", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            else if (conta.getTipo().equals("CC"))
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "Não foi possível realizar o saque!. Valor de Saque ultrapassa o limite da conta!", 
+                    "Saque", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            else
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "Não foi possível realizar o saque!. O saldo ficaria menor que o montante mínimo após realizar o saque!", 
+                    "Saque", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+        } catch (NumberFormatException nfex) {
+            if (valor.getText() instanceof String && !valor.getText().equals(""))
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "O campo Valor está um formato incorreto!", 
+                    "Formato incorreto", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.ERROR_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            else
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "O campo Valor está vazio!", 
+                    "Campo Vazio", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.ERROR_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+        }
     }//GEN-LAST:event_saqueActionPerformed
+
+    private void depositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depositoActionPerformed
+        try {
+            ManipularController manipularController = new ManipularController();        
+            boolean result = manipularController.doDeposito(conta, Double.parseDouble(valor.getText()));
+            if (result)
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "Depósito Realizado!", 
+                    "Depósito", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            else if (conta.getTipo().equals("CC"))
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "Não foi possível realizar o depósito!. Valor de Depósito não pode ser negativo!", 
+                    "Depósito", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            else
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "Não foi possível realizar o depósito!. Valor de Depósito é menor que o depósito mínimo!", 
+                    "Depósito", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+        } catch (NumberFormatException nfex) {
+            if (valor.getText() instanceof String && !valor.getText().equals(""))
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "O campo Valor está um formato incorreto!", 
+                    "Formato incorreto", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.ERROR_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+            else
+                JOptionPane.showOptionDialog(
+                    null, 
+                    "O campo Valor está vazio!", 
+                    "Campo Vazio", 
+                    JOptionPane.DEFAULT_OPTION, 
+                    JOptionPane.ERROR_MESSAGE,
+                    null, 
+                    null, 
+                    null
+                );
+        }
+    }//GEN-LAST:event_depositoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

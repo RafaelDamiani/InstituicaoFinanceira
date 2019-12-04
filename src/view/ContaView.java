@@ -5,6 +5,8 @@
  */
 package view;
 
+import controller.ClienteController;
+import controller.ContaController;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +14,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import model.Cliente;
 import model.ContaCorrente;
 import model.ContaInvestimento;
+import model.dao.ClienteDao;
 import model.dao.ConnectionFactoryComProperties;
 import model.dao.ContaDao;
 
@@ -52,8 +57,11 @@ public class ContaView extends javax.swing.JPanel {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+        
+        jPanel1.revalidate();
+        jPanel1.repaint();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,6 +129,11 @@ public class ContaView extends javax.swing.JPanel {
         jLabelCliente.setText("Cliente:");
 
         jComboCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um cliente..." }));
+        jComboCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboClienteActionPerformed(evt);
+            }
+        });
 
         jLabelConta.setText("Conta:");
 
@@ -205,7 +218,7 @@ public class ContaView extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jComboContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboContaActionPerformed
         String conta = (String) jComboConta.getSelectedItem();
         if(conta.equals("Conta Investimento")){
@@ -245,7 +258,7 @@ public class ContaView extends javax.swing.JPanel {
     }//GEN-LAST:event_inputClienteConta1ActionPerformed
 
     private void jButtonSalvarClienteContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarClienteContaActionPerformed
-       String conta = (String) jComboConta.getSelectedItem();
+        String conta = (String) jComboConta.getSelectedItem();
         int idCliente = 0, numConta = 0;
         String sobrenome = "", cpf = null,nomeCliente = null, sobrenomeCliente = null, rg = null, endereco = null;
         Double salario = null;
@@ -258,6 +271,7 @@ public class ContaView extends javax.swing.JPanel {
             String limite = inputClienteConta2.getText();
             Double lim = Double.parseDouble(limite);
             cc.setLimite(lim);
+            
             String cliente = (String) jComboCliente.getSelectedItem();
             String[] textoSeparado = cliente.split(" ");
             System.out.println(textoSeparado[0] + " " + textoSeparado[1]);
@@ -269,50 +283,23 @@ public class ContaView extends javax.swing.JPanel {
                     sobrenome += textoSeparado[i] + " ";
                 }
             }
-            System.out.println(textoSeparado[0]);
-            System.out.println(sobrenome);
+            //System.out.println(textoSeparado[0]);
+            //System.out.println(sobrenome);
             //Busca id do cliente
-            Connection con = null;
-            PreparedStatement stmt = null;
+            ContaController contaController = new ContaController();
+            ClienteDao clienteDao = new ClienteDao();
             try {
-                con = new ConnectionFactoryComProperties().getConnection();
-
-                String query = "SELECT * FROM tb_cliente WHERE nome = ? AND sobrenome = ?";
-                stmt = con.prepareStatement(query);
-                stmt.setString(1, nome);
-                stmt.setString(2, sobrenome);
-                
-                ResultSet rs = stmt.executeQuery();
-                while(rs.next()){
-                    idCliente = rs.getInt("idcliente");
-                    cpf = rs.getString("cpf");
-                    nomeCliente = rs.getString("nome");
-                    sobrenomeCliente = rs.getString("sobrenome");
-                    rg = rs.getString("rg");
-                    endereco = rs.getString("endereco");
-                    salario = rs.getDouble("salario");
-                }
-
-                Cliente c = new Cliente(nomeCliente, sobrenomeCliente, rg, cpf, endereco, salario);
-                c.setIdCliente(idCliente);
-                cc.setCliente(c);
-                ContaDao cDao = new ContaDao();
-                cDao.insertContaCorrente(cc);
-                
-                //gera o numero da conta
-                query = "SELECT num_conta FROM tb_conta WHERE tipo = ? AND idcliente = ?";
-                stmt = con.prepareStatement(query);
-                stmt.setString(1, "CC");
-                stmt.setInt(2, idCliente);
-                rs = stmt.executeQuery();
-                while(rs.next()){
-                    numConta = rs.getInt("num_conta");
-                }
-                
-                stmt.close();
-                con.close();
+                cc.setCliente(clienteDao.clienteNomeSobrenome(nome, sobrenome));
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Problema ao busca id do cliente" + ex.getMessage());
+            }
+            contaController.prepareInsertContaCorrente(cc);
+            //gera o numero da conta
+            ContaDao contaDao = new ContaDao();
+            try {
+                numConta = contaDao.getNumConta(clienteDao.clienteNomeSobrenome(nome, sobrenome).getIdCliente());
+            } catch (SQLException ex) {
+                System.out.println("Problema ao gerar numero da conta" + ex.getMessage());
             }
             String nc = Integer.toString(numConta);
             inputClienteConta3.setText(nc);
@@ -328,6 +315,7 @@ public class ContaView extends javax.swing.JPanel {
             Double di = Double.parseDouble(depIni);
             ci.setDepositoInicial(di);
             ci.setSaldo(di);
+            
             String cliente = (String) jComboCliente.getSelectedItem();
             String[] textoSeparado = cliente.split(" ");
             System.out.println(textoSeparado[0] + " " + textoSeparado[1]);
@@ -342,39 +330,20 @@ public class ContaView extends javax.swing.JPanel {
             System.out.println(nome);
             System.out.println(sobrenome);
             //Busca id do cliente
-            Connection con = null;
-            PreparedStatement stmt = null;
+            ContaController contaController = new ContaController();
+            ClienteDao clienteDao = new ClienteDao();
             try {
-                con = new ConnectionFactoryComProperties().getConnection();
-
-                String query = "SELECT * FROM tb_cliente WHERE nome = ? AND sobrenome = ?";
-                stmt = con.prepareStatement(query);
-                stmt.setString(1, nome);
-                stmt.setString(2, sobrenome);
-                
-                ResultSet rs = stmt.executeQuery();
-                while(rs.next()){
-                    idCliente = rs.getInt("idcliente");
-                    cpf = rs.getString("cpf");
-                    nomeCliente = rs.getString("nome");
-                    sobrenomeCliente = rs.getString("sobrenome");
-                    rg = rs.getString("rg");
-                    endereco = rs.getString("endereco");
-                    salario = rs.getDouble("salario");
-                }
-
-                Cliente c = new Cliente(nomeCliente, sobrenomeCliente, rg, cpf, endereco, salario);
-                c.setIdCliente(idCliente);
-                ci.setCliente(c);
-                ContaDao cDao = new ContaDao();
-                cDao.insertContaInvestimento(ci);
-                stmt.close();
-                con.close();
+                ci.setCliente(clienteDao.clienteNomeSobrenome(nome, sobrenome));
+                contaController.prepareInsertContaInvestimento(ci);
             } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Problema ao busca id do cliente" + ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonSalvarClienteContaActionPerformed
+
+    private void jComboClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboClienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

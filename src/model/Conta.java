@@ -10,11 +10,11 @@ package model;
  * @author rafae
  */
 public class Conta implements ContaI {
-    public double depositoInicial;
-    private double saldo;
-    private Cliente cliente;
-    private int numConta;
-    private String tipo;
+    protected double depositoInicial;
+    protected double saldo;
+    protected Cliente cliente;
+    protected int numConta;
+    protected String tipo;
 
     public Cliente getCliente() {
         return cliente;
@@ -44,14 +44,6 @@ public class Conta implements ContaI {
         this.depositoInicial = depositoInicial;
     }
     
-    public boolean deposita(double valor) {
-        return true;
-    }
-    
-    public boolean saca(double valor) {
-        return true;
-    }
-    
     @Override
     public Cliente getDono() {
         return cliente;
@@ -72,6 +64,13 @@ public class Conta implements ContaI {
     }
     
     public void remunera() {
-        
+    }
+    
+    public boolean deposita(double valor) {
+        return valor > 0;
+    }
+    
+    public boolean saca(double valor) {
+        return valor > 0;
     }
 }
